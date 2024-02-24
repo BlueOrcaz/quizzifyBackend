@@ -34,9 +34,7 @@ public class Account {
                    String educationalRole,
                    boolean admin,
                    ArrayList<ObjectId> createdFlashcardSetsArrayList,
-                   ArrayList<ObjectId> createdFoldersArrayList
-                   )
-    {
+                   ArrayList<ObjectId> createdFoldersArrayList) {
         this.username = username;
         this.password = password;
         this.email = email;

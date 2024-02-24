@@ -1,8 +1,6 @@
 package dev.BlueOrcaz.Quizzify.Service;
 
 import dev.BlueOrcaz.Quizzify.Model.Account;
-import dev.BlueOrcaz.Quizzify.Model.Flashcard;
-import dev.BlueOrcaz.Quizzify.Model.Folder;
 import dev.BlueOrcaz.Quizzify.Repository.AccountRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ public class AccountService {
     }
 
 
-
     public Account createAccount(String username,
                                  String password,
                                  String email,
@@ -32,7 +29,14 @@ public class AccountService {
                                  boolean admin,
                                  ArrayList<ObjectId> createdFlashcardSetsArrayList,
                                  ArrayList<ObjectId> createdFoldersArrayList) {
-        return accountRepository.insert(new Account(username, password, email, dateOfBirth, educationalRole, admin, createdFlashcardSetsArrayList, createdFoldersArrayList));
+        return accountRepository.insert(new Account(username,
+                password,
+                email,
+                dateOfBirth,
+                educationalRole,
+                admin,
+                createdFlashcardSetsArrayList,
+                createdFoldersArrayList));
     }
 
     public List<Account> allAccounts() {

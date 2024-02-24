@@ -27,6 +27,22 @@ public class FlashcardSet {
     @DocumentReference
     private String author;
 
+    public FlashcardSet(ObjectId id,
+                        String setName,
+                        String setDescription,
+                        boolean isPublic,
+                        String creationDate,
+                        ArrayList<ObjectId> flashcardIds,
+                        String author) {
+        this.id = id;
+        this.setName = setName;
+        this.setDescription = setDescription;
+        this.isPublic = isPublic;
+        this.creationDate = creationDate;
+        this.flashcardIds = flashcardIds;
+        this.author = author;
+    }
+
     public ObjectId getId() {
         return id;
     }

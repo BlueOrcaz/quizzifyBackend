@@ -23,6 +23,14 @@ public class Flashcard {
     private List<String> options;
     private List<String> answer;
 
+    public Flashcard(ObjectId id, String question, String questionType, List<String> options, List<String> answer) {
+        this.id = id;
+        this.question = question;
+        this.questionType = questionType;
+        this.options = options;
+        this.answer = answer;
+    }
+
     public ObjectId getId() {
         return id;
     }

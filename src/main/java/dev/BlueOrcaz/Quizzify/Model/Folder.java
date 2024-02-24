@@ -18,7 +18,6 @@ import java.util.List;
 public class Folder {
     @Id
     private ObjectId id;
-
     private String folderName;
     private String description;
     private String author;
