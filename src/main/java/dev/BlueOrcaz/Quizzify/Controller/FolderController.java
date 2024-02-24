@@ -1,6 +1,4 @@
 package dev.BlueOrcaz.Quizzify.Controller;
-
-import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Model.Folder;
 import dev.BlueOrcaz.Quizzify.Service.FolderService;
 import org.bson.types.ObjectId;

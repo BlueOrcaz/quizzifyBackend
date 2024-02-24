@@ -1,20 +1,15 @@
 package dev.BlueOrcaz.Quizzify.Model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 @Document(collection = "flashcardSets")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 
 public class FlashcardSet {
     @Id

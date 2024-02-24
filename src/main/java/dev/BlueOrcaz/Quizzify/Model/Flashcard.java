@@ -12,8 +12,6 @@ import java.util.List;
 
 @Document(collection = "flashcards")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 
 public class Flashcard {
     @Id
@@ -23,7 +21,11 @@ public class Flashcard {
     private List<String> options;
     private List<String> answer;
 
-    public Flashcard(ObjectId id, String question, String questionType, List<String> options, List<String> answer) {
+    public Flashcard(ObjectId id,
+                     String question,
+                     String questionType,
+                     List<String> options,
+                     List<String> answer) {
         this.id = id;
         this.question = question;
         this.questionType = questionType;

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 @Document(collection = "accounts")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 
 public class Account {
     @Id // unique identifier
