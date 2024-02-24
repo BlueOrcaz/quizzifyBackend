@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.ArrayList;
 
@@ -18,38 +17,42 @@ import java.util.ArrayList;
 public class Account {
     @Id // unique identifier
     private ObjectId id;
-    private String accountId;
     private String username;
     private String password;
     private String email;
     private String dateOfBirth;
     private String educationalRole;
-    @DocumentReference
-    private ArrayList<Flashcards> flashcardsArrayList;
-    private ArrayList<Folder> folderArrayList;
+    private boolean admin;
+    private ArrayList<ObjectId> createdFlashcardSetsArrayList;
+    private ArrayList<ObjectId> createdFoldersArrayList;
 
 
-    public Account(String accountId,
-                   String username,
+    public Account(String username,
                    String password,
                    String email,
                    String dateOfBirth,
-                   String educationalRole)
+                   String educationalRole,
+                   boolean admin,
+                   ArrayList<ObjectId> createdFlashcardSetsArrayList,
+                   ArrayList<ObjectId> createdFoldersArrayList
+                   )
     {
-        this.accountId = accountId;
         this.username = username;
         this.password = password;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.educationalRole = educationalRole;
+        this.admin = admin;
+        this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
+        this.createdFoldersArrayList = createdFoldersArrayList;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -92,19 +95,27 @@ public class Account {
         this.educationalRole = educationalRole;
     }
 
-    public ArrayList<Flashcards> getFlashcardsArrayList() {
-        return flashcardsArrayList;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    public void setFlashcardsArrayList(ArrayList<Flashcards> flashcardsArrayList) {
-        this.flashcardsArrayList = flashcardsArrayList;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
-    public ArrayList<Folder> getFolderArrayList() {
-        return folderArrayList;
+    public ArrayList<ObjectId> getCreatedFlashcardSetsArrayList() {
+        return createdFlashcardSetsArrayList;
     }
 
-    public void setFolderArrayList(ArrayList<Folder> folderArrayList) {
-        this.folderArrayList = folderArrayList;
+    public void setCreatedFlashcardSetsArrayList(ArrayList<ObjectId> createdFlashcardSetsArrayList) {
+        this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
+    }
+
+    public ArrayList<ObjectId> getCreatedFoldersArrayList() {
+        return createdFoldersArrayList;
+    }
+
+    public void setCreatedFoldersArrayList(ArrayList<ObjectId> createdFoldersArrayList) {
+        this.createdFoldersArrayList = createdFoldersArrayList;
     }
 }

@@ -1,4 +1,4 @@
 package dev.BlueOrcaz.Quizzify.Service;
 
-public class FlashcardsService {
+public class FlashcardSetService {
 }
