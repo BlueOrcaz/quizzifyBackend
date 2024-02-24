@@ -18,6 +18,7 @@ import java.util.List;
 public class Folder {
     @Id
     private ObjectId id;
+    private ObjectId authorId;
     private String folderName;
     private String description;
     private String author;
@@ -25,12 +26,31 @@ public class Folder {
     private List<ObjectId> storedFlashcardSets;
     private boolean isPublic;
 
+    public Folder(ObjectId id, ObjectId authorId, String folderName, String description, String author, String creationDate, List<ObjectId> storedFlashcardSets, boolean isPublic) {
+        this.id = id;
+        this.authorId = authorId;
+        this.folderName = folderName;
+        this.description = description;
+        this.author = author;
+        this.creationDate = creationDate;
+        this.storedFlashcardSets = storedFlashcardSets;
+        this.isPublic = isPublic;
+    }
+
     public ObjectId getId() {
         return id;
     }
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public ObjectId getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(ObjectId authorId) {
+        this.authorId = authorId;
     }
 
     public String getFolderName() {

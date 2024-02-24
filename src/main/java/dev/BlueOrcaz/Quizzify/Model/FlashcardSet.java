@@ -19,6 +19,7 @@ import java.util.LinkedList;
 public class FlashcardSet {
     @Id
     private ObjectId id;
+    private ObjectId authorId;
     private String setName;
     private String setDescription;
     private boolean isPublic;
@@ -27,14 +28,9 @@ public class FlashcardSet {
     @DocumentReference
     private String author;
 
-    public FlashcardSet(ObjectId id,
-                        String setName,
-                        String setDescription,
-                        boolean isPublic,
-                        String creationDate,
-                        ArrayList<ObjectId> flashcardIds,
-                        String author) {
+    public FlashcardSet(ObjectId id, ObjectId authorId, String setName, String setDescription, boolean isPublic, String creationDate, ArrayList<ObjectId> flashcardIds, String author) {
         this.id = id;
+        this.authorId = authorId;
         this.setName = setName;
         this.setDescription = setDescription;
         this.isPublic = isPublic;
@@ -49,6 +45,14 @@ public class FlashcardSet {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public ObjectId getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(ObjectId authorId) {
+        this.authorId = authorId;
     }
 
     public String getSetName() {
