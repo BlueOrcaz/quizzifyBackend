@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/folders")
+@CrossOrigin(origins = "http://localhost:3000")
 
 public class FolderController {
     @Autowired
