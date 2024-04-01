@@ -1,6 +1,5 @@
 # Quizzify Backend Readme
 - Computer Science IA App Developed by BlueOrcaz
-- Client: Troy Vilani
 - Full Stack Website with a database
 - Backend stuff:
   - Java
