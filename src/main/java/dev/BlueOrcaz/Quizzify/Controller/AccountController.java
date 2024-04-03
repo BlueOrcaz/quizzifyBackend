@@ -5,15 +5,17 @@ import dev.BlueOrcaz.Quizzify.Service.AccountService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.Optional;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 @RestController
 @RequestMapping("/api/v1/accounts")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 
 public class AccountController {
     @Autowired
@@ -23,17 +25,33 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping
+    @PostMapping("/createAccount")
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
         Account createdAccount = accountService.createAccount(account.getUsername(),
                 account.getPassword(),
                 account.getEmail(),
                 account.getDateOfBirth(),
                 account.getEducationalRole(),
-                account.isAdmin(),
+                account.getRole(),
                 account.getCreatedFlashcardSetsArrayList(),
                 account.getCreatedFoldersArrayList());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAccount);
+    }
+
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> loginAccount(@RequestBody Account account) {
+        boolean isAuthenticated = accountService.login(account.getUsername(), account.getPassword());
+        if (isAuthenticated) {
+            String role = accountService.retrieveRole(account.getUsername());
+            return ResponseEntity.ok().body("{\"username\": \"" + account.getUsername() + "\", \"role\": \"" + role + "\"}");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"UNAUTHORIZED\"}");
+        }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutAccount() {
+        return ResponseEntity.ok("logout successful");
     }
 
     @GetMapping("/{id}")

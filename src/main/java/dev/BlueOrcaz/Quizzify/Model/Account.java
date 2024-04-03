@@ -20,7 +20,7 @@ public class Account {
     private String email;
     private String dateOfBirth;
     private String educationalRole;
-    private boolean admin;
+    private String role;
     private ArrayList<ObjectId> createdFlashcardSetsArrayList;
     private ArrayList<ObjectId> createdFoldersArrayList;
 
@@ -30,7 +30,7 @@ public class Account {
                    String email,
                    String dateOfBirth,
                    String educationalRole,
-                   boolean admin,
+                   String role,
                    ArrayList<ObjectId> createdFlashcardSetsArrayList,
                    ArrayList<ObjectId> createdFoldersArrayList) {
         this.username = username;
@@ -38,7 +38,7 @@ public class Account {
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.educationalRole = educationalRole;
-        this.admin = admin;
+        this.role = role;
         this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
         this.createdFoldersArrayList = createdFoldersArrayList;
     }
@@ -91,12 +91,12 @@ public class Account {
         this.educationalRole = educationalRole;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public String getRole() {
+        return role;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public ArrayList<ObjectId> getCreatedFlashcardSetsArrayList() {
