@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -38,14 +37,29 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAccount);
     }
 
+
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> loginAccount(@RequestBody Account account) {
         boolean isAuthenticated = accountService.login(account.getUsername(), account.getPassword());
         if (isAuthenticated) {
             String role = accountService.retrieveRole(account.getUsername());
-            return ResponseEntity.ok().body("{\"username\": \"" + account.getUsername() + "\", \"role\": \"" + role + "\"}");
+            ObjectId id = accountService.retrieveId(account.getUsername());
+            return ResponseEntity.ok().body("{\"username\": \"" + account.getUsername() + "\", \"role\": \"" + role + "\", \"id\": \"" + id.toHexString() + "\"}");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"UNAUTHORIZED\"}");
+        }
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<Account> updateAccount(@PathVariable("id") ObjectId id,
+                                                 @RequestParam("currentPassword") String currentPassword,
+                                                 @RequestBody Account updatedAccount) {
+
+        Account updated = accountService.updateAccount(id, currentPassword, updatedAccount);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Or return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -63,4 +77,7 @@ public class AccountController {
     public ResponseEntity<List<Account>> getAllAccounts() {
         return new ResponseEntity<List<Account>>(accountService.allAccounts(), HttpStatus.OK);
     }
+
+
+
 }

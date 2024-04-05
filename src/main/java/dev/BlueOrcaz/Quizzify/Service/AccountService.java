@@ -2,7 +2,9 @@ package dev.BlueOrcaz.Quizzify.Service;
 
 import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Repository.AccountRepository;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.bson.types.ObjectId;
+import org.springframework.beans.AbstractNestablePropertyAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,6 +51,35 @@ public class AccountService {
                 createdFoldersArrayList));
     }
 
+
+    public Account updateAccount(ObjectId id, String currentPassword, Account updatedAccount) {
+        Account existingAccount = accountRepository.findById(id)
+                .orElse(null);
+
+        if (existingAccount == null) {
+            return null;
+        }
+
+
+        if (!passwordEncoder.matches(currentPassword, existingAccount.getPassword())) {
+            return null;
+        }
+
+        existingAccount.setUsername(updatedAccount.getUsername());
+        existingAccount.setEmail(updatedAccount.getEmail());
+        existingAccount.setEducationalRole(updatedAccount.getEducationalRole());
+        existingAccount.setDateOfBirth(updatedAccount.getDateOfBirth());
+
+        String newPassword = updatedAccount.getPassword();
+        if (newPassword != null && !newPassword.isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            existingAccount.setPassword(encodedPassword);
+        }
+
+        return accountRepository.save(existingAccount);
+    }
+
+
     public boolean login(String username, String password) {
         Account account = accountRepository.findByUsername(username);
         if(account != null) {
@@ -57,11 +88,17 @@ public class AccountService {
         return false;
     }
 
+
+
     public String retrieveRole(String username) {
         Account account = accountRepository.findByUsername(username);
         return account.getRole();
     }
 
+    public ObjectId retrieveId(String userame) {
+        Account account = accountRepository.findByUsername(userame);
+        return account.getId();
+    }
 
     public List<Account> allAccounts() {
         return accountRepository.findAll();
