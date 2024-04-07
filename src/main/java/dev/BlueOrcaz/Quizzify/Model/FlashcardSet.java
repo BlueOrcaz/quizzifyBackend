@@ -21,7 +21,18 @@ public class FlashcardSet {
     private String name;
     private String description;
     private ArrayList<Flashcard> flashcards;
-    private ArrayList<MCQFlashcard> mcaFlashcards;
+    private ArrayList<MCQFlashcard> mcqFlashcards;
+
+
+    public FlashcardSet(ObjectId authorId, String setType, boolean isPublic, String name, String description, ArrayList<Flashcard> flashcards, ArrayList<MCQFlashcard> mcqFlashcards) {
+        this.authorId = authorId;
+        this.setType = setType;
+        this.isPublic = isPublic;
+        this.name = name;
+        this.description = description;
+        this.flashcards = flashcards;
+        this.mcqFlashcards = mcqFlashcards;
+    }
 
     public ObjectId getId() {
         return id;
@@ -79,11 +90,11 @@ public class FlashcardSet {
         this.flashcards = flashcards;
     }
 
-    public ArrayList<MCQFlashcard> getMcaFlashcards() {
-        return mcaFlashcards;
+    public ArrayList<MCQFlashcard> getMcqFlashcards() {
+        return mcqFlashcards;
     }
 
-    public void setMcaFlashcards(ArrayList<MCQFlashcard> mcaFlashcards) {
-        this.mcaFlashcards = mcaFlashcards;
+    public void setMcaFlashcards(ArrayList<MCQFlashcard> mcqFlashcards) {
+        this.mcqFlashcards = mcqFlashcards;
     }
 }
