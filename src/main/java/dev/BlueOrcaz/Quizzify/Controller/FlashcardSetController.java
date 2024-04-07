@@ -22,11 +22,6 @@ public class FlashcardSetController {
         this.flashcardSetService = flashcardSetService;
     }
 
-    @PostMapping
-    public ResponseEntity<FlashcardSet> createFlashcardSet(@RequestBody FlashcardSet flashcardSet) {
-        FlashcardSet createdFlashcardSet = flashcardSetService.createFlashcardSet(flashcardSet.getId(), flashcardSet.getAuthorId(), flashcardSet.getSetName(), flashcardSet.getSetDescription(), flashcardSet.isPublic(), flashcardSet.getCreationDate(), flashcardSet.getFlashcardIds(), flashcardSet.getAuthor());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdFlashcardSet);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<FlashcardSet>> getFlashcardSet(@PathVariable ObjectId id){

@@ -1,10 +1,11 @@
 package dev.BlueOrcaz.Quizzify.Model;
 
+import dev.BlueOrcaz.Quizzify.Model.Flashcards.Flashcard;
+import dev.BlueOrcaz.Quizzify.Model.Flashcards.MCQFlashcard;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.ArrayList;
 
@@ -15,24 +16,12 @@ public class FlashcardSet {
     @Id
     private ObjectId id;
     private ObjectId authorId;
-    private String setName;
-    private String setDescription;
+    private String setType;
     private boolean isPublic;
-    private String creationDate;
-    private ArrayList<ObjectId> flashcardIds;
-    @DocumentReference
-    private String author;
-
-    public FlashcardSet(ObjectId id, ObjectId authorId, String setName, String setDescription, boolean isPublic, String creationDate, ArrayList<ObjectId> flashcardIds, String author) {
-        this.id = id;
-        this.authorId = authorId;
-        this.setName = setName;
-        this.setDescription = setDescription;
-        this.isPublic = isPublic;
-        this.creationDate = creationDate;
-        this.flashcardIds = flashcardIds;
-        this.author = author;
-    }
+    private String name;
+    private String description;
+    private ArrayList<Flashcard> flashcards;
+    private ArrayList<MCQFlashcard> mcaFlashcards;
 
     public ObjectId getId() {
         return id;
@@ -50,20 +39,12 @@ public class FlashcardSet {
         this.authorId = authorId;
     }
 
-    public String getSetName() {
-        return setName;
+    public String getSetType() {
+        return setType;
     }
 
-    public void setSetName(String setName) {
-        this.setName = setName;
-    }
-
-    public String getSetDescription() {
-        return setDescription;
-    }
-
-    public void setSetDescription(String setDescription) {
-        this.setDescription = setDescription;
+    public void setSetType(String setType) {
+        this.setType = setType;
     }
 
     public boolean isPublic() {
@@ -74,27 +55,35 @@ public class FlashcardSet {
         isPublic = aPublic;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getName() {
+        return name;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<ObjectId> getFlashcardIds() {
-        return flashcardIds;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFlashcardIds(ArrayList<ObjectId> flashcardIds) {
-        this.flashcardIds = flashcardIds;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getAuthor() {
-        return author;
+    public ArrayList<Flashcard> getFlashcards() {
+        return flashcards;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setFlashcards(ArrayList<Flashcard> flashcards) {
+        this.flashcards = flashcards;
+    }
+
+    public ArrayList<MCQFlashcard> getMcaFlashcards() {
+        return mcaFlashcards;
+    }
+
+    public void setMcaFlashcards(ArrayList<MCQFlashcard> mcaFlashcards) {
+        this.mcaFlashcards = mcaFlashcards;
     }
 }

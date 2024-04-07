@@ -1,6 +1,6 @@
 package dev.BlueOrcaz.Quizzify.Controller;
 
-import dev.BlueOrcaz.Quizzify.Model.Flashcard;
+import dev.BlueOrcaz.Quizzify.Model.Flashcards.Flashcard;
 import dev.BlueOrcaz.Quizzify.Service.FlashcardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

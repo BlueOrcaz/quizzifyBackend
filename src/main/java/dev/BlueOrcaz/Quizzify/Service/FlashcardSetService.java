@@ -18,24 +18,6 @@ public class FlashcardSetService {
         this.flashcardSetRepository = flashcardSetRepository;
     }
 
-    public FlashcardSet createFlashcardSet(ObjectId id,
-                                           ObjectId authorId,
-                                           String setName,
-                                           String setDescription,
-                                           boolean isPublic,
-                                           String creationDate,
-                                           ArrayList<ObjectId> flashcardIds,
-                                           String author) {
-       return flashcardSetRepository.insert(new FlashcardSet(
-               id,
-               authorId,
-               setName,
-               setDescription,
-               isPublic,
-               creationDate,
-               flashcardIds,
-               author));
-    }
 
     public List<FlashcardSet> allFlashcardSets() { return flashcardSetRepository.findAll(); }
     public Optional<FlashcardSet> findFlashcardSet(ObjectId id) { return flashcardSetRepository.findById(id); }
