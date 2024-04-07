@@ -18,7 +18,5 @@ public class FlashcardService {
         this.flashcardRepository = flashcardRepository;
     }
 
-    public Flashcard createFlashcard(ObjectId id, String question, String questionType, List<String> options, List<String> answer) {
-        return flashcardRepository.insert(new Flashcard(id, question, questionType, options, answer));
-    }
+
 }

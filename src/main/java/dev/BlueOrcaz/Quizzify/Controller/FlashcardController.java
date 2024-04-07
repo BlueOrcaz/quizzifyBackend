@@ -18,14 +18,4 @@ public class FlashcardController {
         this.flashcardService = flashcardService;
     }
 
-    @PostMapping
-    public ResponseEntity<Flashcard> createFlashcard(@RequestBody Flashcard flashcard){
-        Flashcard createdFlashcard = flashcardService.createFlashcard(
-                flashcard.getId(),
-                flashcard.getQuestion(),
-                flashcard.getQuestionType(),
-                flashcard.getOptions(),
-                flashcard.getAnswer());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdFlashcard);
-    }
 }
