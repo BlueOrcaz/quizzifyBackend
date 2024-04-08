@@ -27,9 +27,39 @@ public class FlashcardSetService {
                                            boolean isPublic,
                                            String setName,
                                            String setDescription,
+                                           String creationDate,
                                            ArrayList<Flashcard> flashcards,
                                            ArrayList<MCQFlashcard> mcqFlashcards
                                            ) {
-        return flashcardSetRepository.insert(new FlashcardSet(authorId, setType, isPublic, setName, setDescription, flashcards, mcqFlashcards));
+        return flashcardSetRepository.insert(new FlashcardSet(
+                authorId,
+                setType,
+                isPublic,
+                setName,
+                setDescription,
+                creationDate,
+                flashcards,
+                mcqFlashcards
+        ));
     }
+
+    public FlashcardSet updateFlashcardSet(ObjectId id, ObjectId authorId, FlashcardSet updatedFlashcardSet) {
+        FlashcardSet existingSet = flashcardSetRepository.findById(id).orElse(null);
+        if(existingSet == null) {
+            return null;
+        }
+        if(!authorId.equals(existingSet.getAuthorId()) ) {
+            return null;
+        }
+
+        existingSet.setName(updatedFlashcardSet.getName());
+        existingSet.setSetType(updatedFlashcardSet.getSetType());
+        existingSet.setPublic(updatedFlashcardSet.isPublic());
+        existingSet.setDescription(updatedFlashcardSet.getDescription());
+        existingSet.setFlashcards(updatedFlashcardSet.getFlashcards());
+        existingSet.setMcqFlashcards(updatedFlashcardSet.getMcqFlashcards());
+
+        return flashcardSetRepository.save(existingSet);
+    }
+
 }

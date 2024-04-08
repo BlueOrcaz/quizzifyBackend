@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 
 public class Flashcard {
-    private int flashcardId;
+    private int id;
     private String front;
     private String back;
 }

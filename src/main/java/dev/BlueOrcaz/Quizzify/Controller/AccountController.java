@@ -1,6 +1,7 @@
 package dev.BlueOrcaz.Quizzify.Controller;
 
 import dev.BlueOrcaz.Quizzify.Model.Account;
+import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Service.AccountService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

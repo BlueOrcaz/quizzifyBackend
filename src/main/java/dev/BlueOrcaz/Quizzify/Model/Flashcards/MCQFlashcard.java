@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Document(collection = "flashcards")
 @Data
 public class MCQFlashcard {
-    private int id;
+    private String id;
     private String question;
     private ArrayList<MCQOption> allOptions;
 }

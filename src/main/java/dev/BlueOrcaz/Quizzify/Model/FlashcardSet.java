@@ -20,16 +20,18 @@ public class FlashcardSet {
     private boolean isPublic;
     private String name;
     private String description;
+    private String creationDate;
     private ArrayList<Flashcard> flashcards;
     private ArrayList<MCQFlashcard> mcqFlashcards;
 
 
-    public FlashcardSet(ObjectId authorId, String setType, boolean isPublic, String name, String description, ArrayList<Flashcard> flashcards, ArrayList<MCQFlashcard> mcqFlashcards) {
+    public FlashcardSet(ObjectId authorId, String setType, boolean isPublic, String name, String description, String creationDate, ArrayList<Flashcard> flashcards, ArrayList<MCQFlashcard> mcqFlashcards) {
         this.authorId = authorId;
         this.setType = setType;
         this.isPublic = isPublic;
         this.name = name;
         this.description = description;
+        this.creationDate = creationDate;
         this.flashcards = flashcards;
         this.mcqFlashcards = mcqFlashcards;
     }
@@ -82,6 +84,14 @@ public class FlashcardSet {
         this.description = description;
     }
 
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public ArrayList<Flashcard> getFlashcards() {
         return flashcards;
     }
@@ -94,7 +104,8 @@ public class FlashcardSet {
         return mcqFlashcards;
     }
 
-    public void setMcaFlashcards(ArrayList<MCQFlashcard> mcqFlashcards) {
+    public void setMcqFlashcards(ArrayList<MCQFlashcard> mcqFlashcards) {
         this.mcqFlashcards = mcqFlashcards;
     }
+
 }
