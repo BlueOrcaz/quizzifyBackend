@@ -13,4 +13,28 @@ public class MCQFlashcard {
     private String id;
     private String question;
     private ArrayList<MCQOption> allOptions;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public ArrayList<MCQOption> getAllOptions() {
+        return allOptions;
+    }
+
+    public void setAllOptions(ArrayList<MCQOption> allOptions) {
+        this.allOptions = allOptions;
+    }
 }
