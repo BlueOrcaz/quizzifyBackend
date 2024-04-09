@@ -13,18 +13,23 @@ import java.util.ArrayList;
 @Data
 
 public class FlashcardSet {
-    @Id
+    @Id // generated when added to the database
     private ObjectId id;
-    private ObjectId authorId;
+    private ObjectId authorId; // the user's objectid
+
+    // flashcard details
     private String setType;
     private boolean isPublic;
     private String name;
     private String description;
     private String creationDate;
+
+    // stored flashcards based off of an arraylist
     private ArrayList<Flashcard> flashcards;
     private ArrayList<MCQFlashcard> mcqFlashcards;
 
 
+    // constructor
     public FlashcardSet(ObjectId authorId, String setType, boolean isPublic, String name, String description, String creationDate, ArrayList<Flashcard> flashcards, ArrayList<MCQFlashcard> mcqFlashcards) {
         this.authorId = authorId;
         this.setType = setType;
@@ -36,6 +41,7 @@ public class FlashcardSet {
         this.mcqFlashcards = mcqFlashcards;
     }
 
+    //getter setters
     public ObjectId getId() {
         return id;
     }

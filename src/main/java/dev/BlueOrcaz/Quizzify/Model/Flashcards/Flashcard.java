@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 
 public class Flashcard {
+    // flashcard object consisting of an id, front, and back
     private int id;
     private String front;
     private String back;

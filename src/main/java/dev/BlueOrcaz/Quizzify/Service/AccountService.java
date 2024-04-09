@@ -18,30 +18,33 @@ import java.util.Optional;
 @Service
 
 public class AccountService {
+    // stores all the methods in the backend.
     @Autowired
-    private final AccountRepository accountRepository;
+    private final AccountRepository accountRepository; // account repository
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder; // spring security to hash passwords
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository) { // constructor
         this.accountRepository = accountRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
 
-    public Account createAccount(String username,
+    public Account createAccount(ObjectId id,
+                                 String username,
                                  String password,
                                  String email,
                                  String dateOfBirth,
                                  String educationalRole,
                                  String role,
                                  ArrayList<ObjectId> createdFlashcardSetsArrayList,
-                                 ArrayList<ObjectId> createdFoldersArrayList) {
+                                 ArrayList<ObjectId> createdFoldersArrayList) { // method to create accounts, as well as encode the password to store in database
 
         String encodedPassword = this.passwordEncoder.encode(password);
 
-        return accountRepository.insert(new Account(username,
+        return accountRepository.insert(new Account(id,
+                username,
                 encodedPassword,
                 email,
                 dateOfBirth,
@@ -52,9 +55,9 @@ public class AccountService {
     }
 
 
-    public Account updateAccount(ObjectId id, String currentPassword, Account updatedAccount) {
+    public Account updateAccount(ObjectId id, String currentPassword, Account updatedAccount) { // update account details based off of the requested id.
         Account existingAccount = accountRepository.findById(id)
-                .orElse(null);
+                .orElse(null); // if there isnt anything return null
 
         if (existingAccount == null) {
             return null;
@@ -76,11 +79,11 @@ public class AccountService {
             existingAccount.setPassword(encodedPassword);
         }
 
-        return accountRepository.save(existingAccount);
+        return accountRepository.save(existingAccount); // update the account in database with the new details
     }
 
 
-    public boolean login(String username, String password) {
+    public boolean login(String username, String password) { // allows user to login if they find account details and password matches
         Account account = accountRepository.findByUsername(username);
         if(account != null) {
             return passwordEncoder.matches(password, account.getPassword());
@@ -90,21 +93,21 @@ public class AccountService {
 
 
 
-    public String retrieveRole(String username) {
+    public String retrieveRole(String username) { // retrieve the user's role based off of their username
         Account account = accountRepository.findByUsername(username);
         return account.getRole();
     }
 
-    public ObjectId retrieveId(String userame) {
+    public ObjectId retrieveId(String userame) { // retrieve the user's id based off of their username
         Account account = accountRepository.findByUsername(userame);
         return account.getId();
     }
 
     public List<Account> allAccounts() {
         return accountRepository.findAll();
-    }
+    } // returns all accounts in a list
 
     public Optional<Account> findAccount(ObjectId id) {
         return accountRepository.findById(id);
-    }
+    } // returns a specific account obj based off of the object id
 }

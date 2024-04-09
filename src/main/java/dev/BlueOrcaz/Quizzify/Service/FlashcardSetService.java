@@ -15,13 +15,15 @@ import java.util.Optional;
 @Service
 public class FlashcardSetService {
     @Autowired
-    private final FlashcardSetRepository flashcardSetRepository;
-    public FlashcardSetService(FlashcardSetRepository flashcardSetRepository) {
+    private final FlashcardSetRepository flashcardSetRepository; // flashcard set repository
+    public FlashcardSetService(FlashcardSetRepository flashcardSetRepository) { // constructor
         this.flashcardSetRepository = flashcardSetRepository;
     }
-    public List<FlashcardSet> allFlashcardSets() { return flashcardSetRepository.findAll(); }
-    public Optional<FlashcardSet> findFlashcardSet(ObjectId id) { return flashcardSetRepository.findById(id); }
+    public List<FlashcardSet> allFlashcardSets() { return flashcardSetRepository.findAll(); } // list of all flashcard sets
+    public Optional<FlashcardSet> findFlashcardSet(ObjectId id) { return flashcardSetRepository.findById(id); } // find a flashcard set object based off of a specific id
 
+
+    // create a flashcard set based off of all details.
     public FlashcardSet createFlashcardSet(ObjectId authorId,
                                            String setType,
                                            boolean isPublic,
@@ -43,8 +45,10 @@ public class FlashcardSetService {
         ));
     }
 
+
+    // updates flashcard set based off of the id, author id and flashcard set object
     public FlashcardSet updateFlashcardSet(ObjectId id, ObjectId authorId, FlashcardSet updatedFlashcardSet) {
-        FlashcardSet existingSet = flashcardSetRepository.findById(id).orElse(null);
+        FlashcardSet existingSet = flashcardSetRepository.findById(id).orElse(null); // if it doesnt find anything, return null
         if(existingSet == null) {
             return null;
         }
@@ -59,7 +63,7 @@ public class FlashcardSetService {
         existingSet.setFlashcards(updatedFlashcardSet.getFlashcards());
         existingSet.setMcqFlashcards(updatedFlashcardSet.getMcqFlashcards());
 
-        return flashcardSetRepository.save(existingSet);
+        return flashcardSetRepository.save(existingSet); // overwrite the stored flashcard set with the new details.
     }
 
 }

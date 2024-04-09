@@ -13,8 +13,10 @@ import java.util.ArrayList;
 @Data
 
 public class Account {
-    @Id // unique identifier
+    @Id // unique identifier that is generated when added to the database
     private ObjectId id;
+
+    // account details
     private String username;
     private String password;
     private String email;
@@ -25,7 +27,9 @@ public class Account {
     private ArrayList<ObjectId> createdFoldersArrayList;
 
 
-    public Account(String username,
+    //constructor
+    public Account(ObjectId id,
+                   String username,
                    String password,
                    String email,
                    String dateOfBirth,
@@ -33,6 +37,7 @@ public class Account {
                    String role,
                    ArrayList<ObjectId> createdFlashcardSetsArrayList,
                    ArrayList<ObjectId> createdFoldersArrayList) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -43,6 +48,7 @@ public class Account {
         this.createdFoldersArrayList = createdFoldersArrayList;
     }
 
+    // accessor/mutator methods
     public ObjectId getId() {
         return id;
     }

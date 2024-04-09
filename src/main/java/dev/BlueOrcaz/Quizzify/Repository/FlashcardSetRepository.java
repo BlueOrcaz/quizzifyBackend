@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface FlashcardSetRepository extends MongoRepository<FlashcardSet, ObjectId> {
+public interface FlashcardSetRepository extends MongoRepository<FlashcardSet, ObjectId> { // allows for backend to search for details based off of an id
 }

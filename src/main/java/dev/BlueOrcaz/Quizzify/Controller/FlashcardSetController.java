@@ -15,18 +15,18 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 public class FlashcardSetController {
     @Autowired
-    private final FlashcardSetService flashcardSetService;
-    public FlashcardSetController(FlashcardSetService flashcardSetService) {
+    private final FlashcardSetService flashcardSetService; // flashcard set service stores all necessary methods
+    public FlashcardSetController(FlashcardSetService flashcardSetService) { // constructor
         this.flashcardSetService = flashcardSetService;
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // retrieve a flashcard set based off of an ObjectId
     public ResponseEntity<Optional<FlashcardSet>> getFlashcardSet(@PathVariable ObjectId id){
         return new ResponseEntity<Optional<FlashcardSet>>(flashcardSetService.findFlashcardSet(id), HttpStatus.OK);
     }
 
-    @PostMapping("/createFlashcardSet")
+    @PostMapping("/createFlashcardSet") // sends post request to the server to create a flashcard set with all details
     public ResponseEntity<String> createFlashcardSet(@RequestBody FlashcardSet flashcardSet) {
         FlashcardSet createdSet = flashcardSetService.createFlashcardSet(
                 flashcardSet.getAuthorId(),
@@ -37,10 +37,10 @@ public class FlashcardSetController {
                 flashcardSet.getCreationDate(),
                 flashcardSet.getFlashcards(),
                 flashcardSet.getMcqFlashcards());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdSet.getId().toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdSet.getId().toString()); // if successful then return the id for the user to use.
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}") // put request to update flashcards. Only allowed to update flashcards you made.
     public ResponseEntity<FlashcardSet> updateFlashcardSet(@PathVariable("id") ObjectId id,
                                                            @RequestParam("authorId") ObjectId authorId,
                                                            @RequestBody FlashcardSet updatedFlashcardSet) {
