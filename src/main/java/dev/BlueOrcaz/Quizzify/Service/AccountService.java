@@ -107,7 +107,24 @@ public class AccountService {
         return accountRepository.findAll();
     } // returns all accounts in a list
 
-    public Optional<Account> findAccount(ObjectId id) {
+    public Optional<Account> findAccount(ObjectId id) { // returns a specific account obj based off of the object id
         return accountRepository.findById(id);
-    } // returns a specific account obj based off of the object id
+    }
+
+    public boolean deleteAccount(ObjectId accountId, String currentPassword) {
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+            if (!passwordEncoder.matches(currentPassword, account.getPassword())) { // check if the password matches
+                return false; // password doesn't match, return false
+            }
+
+            accountRepository.delete(account); // delete the account
+            return true;
+        } else {
+            return false; // account not found, return false
+        }
+    }
+
 }

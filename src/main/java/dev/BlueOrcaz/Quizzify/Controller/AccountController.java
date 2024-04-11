@@ -80,6 +80,16 @@ public class AccountController {
         return new ResponseEntity<List<Account>>(accountService.allAccounts(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteAccount/{id}")
+    public ResponseEntity<String> deleteAccount(@PathVariable ObjectId id, @RequestParam("currentPassword") String currentPassword) {
+        boolean deleted = accountService.deleteAccount(id, currentPassword);
+        if (deleted) {
+            return ResponseEntity.ok("Account deleted");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
 }
