@@ -24,13 +24,13 @@ public class Account {
     private String dateOfBirth;
     private String educationalRole;
     private String role;
-    private ArrayList<ObjectId> createdFlashcardSetsArrayList;
+    private ArrayList<String> createdFlashcardSetsArrayList;
 
 
 
     //constructor
 
-    public Account(ObjectId id, String username, String password, String email, String dateOfBirth, String educationalRole, String role, ArrayList<ObjectId> createdFlashcardSetsArrayList) {
+    public Account(ObjectId id, String username, String password, String email, String dateOfBirth, String educationalRole, String role, ArrayList<String> createdFlashcardSetsArrayList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -98,11 +98,11 @@ public class Account {
         this.role = role;
     }
 
-    public ArrayList<ObjectId> getCreatedFlashcardSetsArrayList() {
+    public ArrayList<String> getCreatedFlashcardSetsArrayList() {
         return createdFlashcardSetsArrayList;
     }
 
-    public void setCreatedFlashcardSetsArrayList(ArrayList<ObjectId> createdFlashcardSetsArrayList) {
+    public void setCreatedFlashcardSetsArrayList(ArrayList<String> createdFlashcardSetsArrayList) {
         this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
     }
 }

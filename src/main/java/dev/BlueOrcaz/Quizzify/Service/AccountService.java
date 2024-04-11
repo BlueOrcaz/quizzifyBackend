@@ -39,7 +39,7 @@ public class AccountService {
                                  String dateOfBirth,
                                  String educationalRole,
                                  String role,
-                                 ArrayList<ObjectId> createdFlashcardSetsArrayList
+                                 ArrayList<String> createdFlashcardSetsArrayList
                                  ) { // method to create accounts, as well as encode the password to store in database
 
         String encodedPassword = this.passwordEncoder.encode(password);
@@ -57,7 +57,7 @@ public class AccountService {
 
     public void addFlashcardSetToAccount(ObjectId accountId, FlashcardSet flashcardSet) {
         Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
-        account.getCreatedFlashcardSetsArrayList().add(flashcardSet.getId());
+        account.getCreatedFlashcardSetsArrayList().add(flashcardSet.getId().toString());
         accountRepository.save(account);
     }
 
@@ -91,7 +91,6 @@ public class AccountService {
         return accountRepository.save(existingAccount); // update the account in database with the new details
     }
 
-
     public boolean login(String username, String password) { // allows user to login if they find account details and password matches
         Account account = accountRepository.findByUsername(username);
         if(account != null) {
@@ -107,8 +106,8 @@ public class AccountService {
         return account.getRole();
     }
 
-    public ObjectId retrieveId(String userame) { // retrieve the user's id based off of their username
-        Account account = accountRepository.findByUsername(userame);
+    public ObjectId retrieveId(String username) { // retrieve the user's id based off of their username
+        Account account = accountRepository.findByUsername(username);
         return account.getId();
     }
 

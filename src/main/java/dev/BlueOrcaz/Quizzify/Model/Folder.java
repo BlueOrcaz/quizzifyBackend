@@ -4,10 +4,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Document(collection = "Folders")
+@Document(collection = "folders")
 @Data
 
 public class Folder {
@@ -15,15 +16,13 @@ public class Folder {
     private ObjectId id;
     private ObjectId authorId;
     private String folderName;
-    private String description;
     private String creationDate;
-    private List<FlashcardSet> storedFlashcardSets;
+    private ArrayList<String> storedFlashcardSets;
 
-    public Folder(ObjectId id, ObjectId authorId, String folderName, String description, String creationDate, List<FlashcardSet> storedFlashcardSets) {
+    public Folder(ObjectId id, ObjectId authorId, String folderName, String creationDate, ArrayList<String> storedFlashcardSets) {
         this.id = id;
         this.authorId = authorId;
         this.folderName = folderName;
-        this.description = description;
         this.creationDate = creationDate;
         this.storedFlashcardSets = storedFlashcardSets;
     }
@@ -52,14 +51,6 @@ public class Folder {
         this.folderName = folderName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCreationDate() {
         return creationDate;
     }
@@ -68,11 +59,11 @@ public class Folder {
         this.creationDate = creationDate;
     }
 
-    public List<FlashcardSet> getStoredFlashcardSets() {
+    public ArrayList<String> getStoredFlashcardSets() {
         return storedFlashcardSets;
     }
 
-    public void setStoredFlashcardSets(List<FlashcardSet> storedFlashcardSets) {
+    public void setStoredFlashcardSets(ArrayList<String> storedFlashcardSets) {
         this.storedFlashcardSets = storedFlashcardSets;
     }
 }

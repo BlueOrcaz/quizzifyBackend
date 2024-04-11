@@ -7,6 +7,7 @@ import dev.BlueOrcaz.Quizzify.Repository.FlashcardSetRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,10 @@ public class FlashcardSetService {
 
     public Optional<FlashcardSet> findAllFlashcardSetsBasedOffAuthorId(ObjectId authorId) {
         return flashcardSetRepository.findAllById(authorId);
+    }
+
+    public String retrieveFlashcardString(FlashcardSet flashcardSet) {
+        return flashcardSet.getId().toString();
     }
 
 
