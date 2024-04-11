@@ -59,4 +59,10 @@ public class FolderService {
     public Optional<Folder> findFolder(ObjectId id) {
         return folderRepository.findById(id);
     }
+
+    public void addFlashcardSetToFolder(ObjectId folderId, FlashcardSet flashcardSet) {
+        Folder folder = folderRepository.findById(folderId).orElseThrow(() -> new RuntimeException("Folder Not Found"));
+        folder.getStoredFlashcardSets().add((flashcardSet.getId().toString()));
+        folderRepository.save(folder);
+    }
 }

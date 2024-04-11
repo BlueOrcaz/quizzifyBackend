@@ -1,4 +1,5 @@
 package dev.BlueOrcaz.Quizzify.Controller;
+import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Model.Folder;
 import dev.BlueOrcaz.Quizzify.Service.FolderService;
 import org.bson.types.ObjectId;
@@ -31,6 +32,12 @@ public class FolderController {
     public ResponseEntity<Folder> createFolder(@RequestBody Folder folder) {
         Folder createdFolder = folderService.createFolder(folder.getId(), folder.getAuthorId(), folder.getFolderName(), folder.getCreationDate(), folder.getStoredFlashcardSets());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdFolder);
+    }
+
+    @PostMapping("/{folderId}/flashcardSets")
+    public ResponseEntity<String> addFlashcardSetToFolder(@PathVariable("folderId") ObjectId folderId, @RequestBody FlashcardSet flashcardSet) {
+        folderService.addFlashcardSetToFolder(folderId, flashcardSet);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Saved");
     }
 
     @PutMapping("/update/{id}")
