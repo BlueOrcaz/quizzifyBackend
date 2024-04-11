@@ -13,16 +13,5 @@ import java.util.Optional;
 @Service
 
 public class FolderService {
-    @Autowired
-    private final FolderRepository folderRepository;
-    public FolderService(FolderRepository folderRepository) {
-        this.folderRepository = folderRepository;
-    }
 
-    public Folder createFolder(ObjectId id, ObjectId authorId, String folderName, String description, String author, String creationDate, List<ObjectId> storedFlashcardSets, boolean isPublic) {
-        return folderRepository.insert(new Folder(id, authorId, folderName, description, author, creationDate, storedFlashcardSets, isPublic));
-    }
-
-    public List<Folder> allFolders() { return folderRepository.findAll(); }
-    public Optional<Folder> findFolder(ObjectId id) { return folderRepository.findById(id); }
 }

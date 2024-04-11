@@ -16,11 +16,17 @@ import java.util.Optional;
 public class FlashcardSetService {
     @Autowired
     private final FlashcardSetRepository flashcardSetRepository; // flashcard set repository
-    public FlashcardSetService(FlashcardSetRepository flashcardSetRepository) { // constructor
+    private final AccountService accountService;
+    public FlashcardSetService(FlashcardSetRepository flashcardSetRepository, AccountService accountService) { // constructor
         this.flashcardSetRepository = flashcardSetRepository;
+        this.accountService = accountService;
     }
     public List<FlashcardSet> allFlashcardSets() { return flashcardSetRepository.findAll(); } // list of all flashcard sets
     public Optional<FlashcardSet> findFlashcardSet(ObjectId id) { return flashcardSetRepository.findById(id); } // find a flashcard set object based off of a specific id
+
+    public Optional<FlashcardSet> findAllFlashcardSetsBasedOffAuthorId(ObjectId authorId) {
+        return flashcardSetRepository.findAllById(authorId);
+    }
 
 
     // create a flashcard set based off of all details.
@@ -33,7 +39,8 @@ public class FlashcardSetService {
                                            ArrayList<Flashcard> flashcards,
                                            ArrayList<MCQFlashcard> mcqFlashcards
                                            ) {
-        return flashcardSetRepository.insert(new FlashcardSet(
+
+        FlashcardSet newFlashcardSet = flashcardSetRepository.insert(new FlashcardSet(
                 authorId,
                 setType,
                 isPublic,
@@ -43,6 +50,10 @@ public class FlashcardSetService {
                 flashcards,
                 mcqFlashcards
         ));
+
+        accountService.addFlashcardSetToAccount(authorId, newFlashcardSet);
+
+        return newFlashcardSet;
     }
 
 

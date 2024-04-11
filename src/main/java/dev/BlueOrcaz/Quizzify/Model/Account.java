@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "accounts")
 @Data
@@ -24,19 +25,12 @@ public class Account {
     private String educationalRole;
     private String role;
     private ArrayList<ObjectId> createdFlashcardSetsArrayList;
-    private ArrayList<ObjectId> createdFoldersArrayList;
+
 
 
     //constructor
-    public Account(ObjectId id,
-                   String username,
-                   String password,
-                   String email,
-                   String dateOfBirth,
-                   String educationalRole,
-                   String role,
-                   ArrayList<ObjectId> createdFlashcardSetsArrayList,
-                   ArrayList<ObjectId> createdFoldersArrayList) {
+
+    public Account(ObjectId id, String username, String password, String email, String dateOfBirth, String educationalRole, String role, ArrayList<ObjectId> createdFlashcardSetsArrayList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -45,7 +39,6 @@ public class Account {
         this.educationalRole = educationalRole;
         this.role = role;
         this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
-        this.createdFoldersArrayList = createdFoldersArrayList;
     }
 
     // accessor/mutator methods
@@ -111,13 +104,5 @@ public class Account {
 
     public void setCreatedFlashcardSetsArrayList(ArrayList<ObjectId> createdFlashcardSetsArrayList) {
         this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
-    }
-
-    public ArrayList<ObjectId> getCreatedFoldersArrayList() {
-        return createdFoldersArrayList;
-    }
-
-    public void setCreatedFoldersArrayList(ArrayList<ObjectId> createdFoldersArrayList) {
-        this.createdFoldersArrayList = createdFoldersArrayList;
     }
 }

@@ -26,6 +26,11 @@ public class FlashcardSetController {
         return new ResponseEntity<Optional<FlashcardSet>>(flashcardSetService.findFlashcardSet(id), HttpStatus.OK);
     }
 
+    @GetMapping("/all/{authorId}")
+    public ResponseEntity<Optional<FlashcardSet>> getAuthorFlashcardSets(@PathVariable ObjectId authorId) {
+        return new ResponseEntity<Optional<FlashcardSet>>(flashcardSetService.findAllFlashcardSetsBasedOffAuthorId(authorId), HttpStatus.OK);
+    }
+
     @PostMapping("/createFlashcardSet") // sends post request to the server to create a flashcard set with all details
     public ResponseEntity<String> createFlashcardSet(@RequestBody FlashcardSet flashcardSet) {
         FlashcardSet createdSet = flashcardSetService.createFlashcardSet(

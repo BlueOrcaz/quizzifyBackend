@@ -15,27 +15,5 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 
 public class FolderController {
-    @Autowired
-    private final FolderService folderService;
-    public FolderController(FolderService folderService) {
-        this.folderService = folderService;
-    }
-
-    @PostMapping
-    public ResponseEntity<Folder> createFolder(@RequestBody Folder folder) {
-        Folder createdFolder = folderService.createFolder(folder.getId(), folder.getAuthorId(), folder.getFolderName(), folder.getDescription(), folder.getAuthor(), folder.getCreationDate(), folder.getStoredFlashcardSets(), folder.isPublic());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdFolder);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Folder>> getFolder(@PathVariable ObjectId id){
-        return new ResponseEntity<Optional<Folder>>(folderService.findFolder(id), HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Folder>> getAllFolders() {
-        return new ResponseEntity<List<Folder>>(folderService.allFolders(), HttpStatus.OK);
-    }
-
 
 }
