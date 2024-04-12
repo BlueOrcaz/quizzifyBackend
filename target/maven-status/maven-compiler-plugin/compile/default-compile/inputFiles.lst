@@ -1,0 +1,17 @@
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Repository\FolderRepository.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Flashcards\MCQFlashcard.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Controller\AccountController.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Controller\FlashcardSetController.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Repository\AccountRepository.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Service\AccountService.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Service\FlashcardSetService.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Folder.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Controller\FolderController.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Flashcards\Flashcard.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\SecurityConfig.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\FlashcardSet.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Repository\FlashcardSetRepository.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Account.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Service\FolderService.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Flashcards\MCQOption.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\QuizzifyApplication.java
