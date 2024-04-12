@@ -25,12 +25,13 @@ public class Account {
     private String educationalRole;
     private String role;
     private ArrayList<String> createdFlashcardSetsArrayList;
+    private ArrayList<String> createdFoldersArrayList;
 
 
 
     //constructor
 
-    public Account(ObjectId id, String username, String password, String email, String dateOfBirth, String educationalRole, String role, ArrayList<String> createdFlashcardSetsArrayList) {
+    public Account(ObjectId id, String username, String password, String email, String dateOfBirth, String educationalRole, String role, ArrayList<String> createdFlashcardSetsArrayList, ArrayList<String> createdFoldersArrayList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -39,6 +40,7 @@ public class Account {
         this.educationalRole = educationalRole;
         this.role = role;
         this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
+        this.createdFoldersArrayList = createdFoldersArrayList;
     }
 
     // accessor/mutator methods
@@ -104,5 +106,13 @@ public class Account {
 
     public void setCreatedFlashcardSetsArrayList(ArrayList<String> createdFlashcardSetsArrayList) {
         this.createdFlashcardSetsArrayList = createdFlashcardSetsArrayList;
+    }
+
+    public ArrayList<String> getCreatedFoldersArrayList() {
+        return createdFoldersArrayList;
+    }
+
+    public void setCreatedFoldersArrayList(ArrayList<String> createdFoldersArrayList) {
+        this.createdFoldersArrayList = createdFoldersArrayList;
     }
 }

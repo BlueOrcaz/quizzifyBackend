@@ -2,6 +2,7 @@ package dev.BlueOrcaz.Quizzify.Service;
 
 import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
+import dev.BlueOrcaz.Quizzify.Model.Folder;
 import dev.BlueOrcaz.Quizzify.Repository.AccountRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.bson.types.ObjectId;
@@ -39,7 +40,8 @@ public class AccountService {
                                  String dateOfBirth,
                                  String educationalRole,
                                  String role,
-                                 ArrayList<String> createdFlashcardSetsArrayList
+                                 ArrayList<String> createdFlashcardSetsArrayList,
+                                 ArrayList<String> createdFoldersArrayList
                                  ) { // method to create accounts, as well as encode the password to store in database
 
         String encodedPassword = this.passwordEncoder.encode(password);
@@ -51,13 +53,20 @@ public class AccountService {
                 dateOfBirth,
                 educationalRole,
                 role,
-                createdFlashcardSetsArrayList
+                createdFlashcardSetsArrayList,
+                createdFoldersArrayList
         ));
     }
 
     public void addFlashcardSetToAccount(ObjectId accountId, FlashcardSet flashcardSet) {
         Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
         account.getCreatedFlashcardSetsArrayList().add(flashcardSet.getId().toString());
+        accountRepository.save(account);
+    }
+
+    public void addFolderSetToAccount(ObjectId accountId, Folder folder) {
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
+        account.getCreatedFoldersArrayList().add(folder.getId().toString());
         accountRepository.save(account);
     }
 

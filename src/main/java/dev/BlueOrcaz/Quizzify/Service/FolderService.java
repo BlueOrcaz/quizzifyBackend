@@ -19,12 +19,18 @@ public class FolderService {
     @Autowired
     private final FolderRepository folderRepository;
 
-    public FolderService(FolderRepository folderRepository) {
+    @Autowired
+    private final AccountService accountService;
+
+    public FolderService(FolderRepository folderRepository, AccountService accountService) {
         this.folderRepository = folderRepository;
+        this.accountService = accountService;
     }
 
     public Folder createFolder(ObjectId id, ObjectId authorId, String folderName, String creationDate, ArrayList<String> storedFlashcardSets) { // create folder based off of params
-        return folderRepository.insert(new Folder(id, authorId, folderName, creationDate, storedFlashcardSets));
+        Folder newFolder = folderRepository.insert(new Folder(id, authorId, folderName, creationDate, storedFlashcardSets));
+        accountService.addFolderSetToAccount(authorId, newFolder);
+        return newFolder;
     }
 
     public Folder updateFolder(ObjectId id, String authorId, Folder updatedFolder) { // update folder if the correct author id is displayed

@@ -34,7 +34,8 @@ public class AccountController {
                 account.getDateOfBirth(),
                 account.getEducationalRole(),
                 account.getRole(),
-                account.getCreatedFlashcardSetsArrayList());
+                account.getCreatedFlashcardSetsArrayList(),
+                account.getCreatedFoldersArrayList());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAccount); // returns the account details
     }
 

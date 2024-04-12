@@ -29,9 +29,9 @@ public class FolderController {
     }
 
     @PostMapping("/createFolder")
-    public ResponseEntity<Folder> createFolder(@RequestBody Folder folder) {
+    public ResponseEntity<String> createFolder(@RequestBody Folder folder) {
         Folder createdFolder = folderService.createFolder(folder.getId(), folder.getAuthorId(), folder.getFolderName(), folder.getCreationDate(), folder.getStoredFlashcardSets());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdFolder);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdFolder.getId().toString());
     }
 
     @PostMapping("/{folderId}/flashcardSets")
