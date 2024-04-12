@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/flashcardSets")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class FlashcardSetController {
     @Autowired
     private final FlashcardSetService flashcardSetService; // flashcard set service stores all necessary methods
