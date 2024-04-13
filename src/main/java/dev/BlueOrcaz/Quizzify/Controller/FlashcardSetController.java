@@ -2,6 +2,7 @@ package dev.BlueOrcaz.Quizzify.Controller;
 
 import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Service.FlashcardSetService;
+import org.apache.coyote.Response;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +58,16 @@ public class FlashcardSetController {
             return ResponseEntity.ok(updated);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Or return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @DeleteMapping("/deleteFlashcardSet/{id}")
+    public ResponseEntity<String> deleteFlashcardSet(@PathVariable ObjectId id, @RequestParam("authorId") ObjectId accountId) {
+        boolean deleted = flashcardSetService.deleteFlashcardSet(accountId, id);
+        if (deleted) {
+            return ResponseEntity.ok("Flashcard Set Deleted");
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

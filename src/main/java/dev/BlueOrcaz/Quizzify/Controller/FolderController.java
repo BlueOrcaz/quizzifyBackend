@@ -52,9 +52,9 @@ public class FolderController {
         }
     }
 
-    @DeleteMapping("/deleteAccount/{id}")
-    public ResponseEntity<String> deleteFolder(@PathVariable ObjectId id) {
-        boolean deleted = folderService.deleteFolder(id);
+    @DeleteMapping("/deleteFolder/{id}")
+    public ResponseEntity<String> deleteFolder(@PathVariable ObjectId id, @RequestParam("authorId") ObjectId accountId) {
+        boolean deleted = folderService.deleteFolder(id, accountId);
         if (deleted) {
             return ResponseEntity.ok("Folder Deleted");
         } else {

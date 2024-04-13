@@ -1,4 +1,3 @@
-# Stage 1: Build the application
 FROM eclipse-temurin:21-jdk-alpine
 VOLUME /tmp
 COPY target/*.jar app.jar

@@ -1,7 +1,9 @@
 package dev.BlueOrcaz.Quizzify.Service;
 
+import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Model.Folder;
+import dev.BlueOrcaz.Quizzify.Repository.AccountRepository;
 import dev.BlueOrcaz.Quizzify.Repository.FolderRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,15 @@ public class FolderService {
     // stores all the methods in the backend
     @Autowired
     private final FolderRepository folderRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
     private final AccountService accountService;
 
-    public FolderService(FolderRepository folderRepository, AccountService accountService) {
+    public FolderService(FolderRepository folderRepository, AccountService accountService, AccountRepository accountRepository) {
         this.folderRepository = folderRepository;
         this.accountService = accountService;
+        this.accountRepository = accountRepository;
     }
 
     public Folder createFolder(ObjectId id, ObjectId authorId, String folderName, String creationDate, ArrayList<String> storedFlashcardSets) { // create folder based off of params
@@ -50,8 +54,24 @@ public class FolderService {
         return folderRepository.save(existingFolder);
     }
 
-    public boolean deleteFolder(ObjectId folderId) {
+    public boolean deleteFolder(ObjectId folderId, ObjectId accountId) {
         Optional<Folder> folderOptional = folderRepository.findById(folderId);
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+
+        if (accountOptional.isPresent() && folderOptional.isPresent()) {
+            Account account = accountOptional.get();
+            Folder folder = folderOptional.get();
+            ArrayList<String> folders = account.getCreatedFoldersArrayList();
+
+            if (folders.contains(folderId.toString())) {
+                folders.remove(folderId.toString());
+                account.setCreatedFoldersArrayList(folders);
+                accountRepository.save(account);
+                folderRepository.delete(folder);
+                return true;
+            }
+            return false;
+        }
 
         if (folderOptional.isPresent()) {
             Folder folder = folderOptional.get();
