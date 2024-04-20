@@ -9,6 +9,7 @@ D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model
 D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Controller\FolderController.java
 D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Flashcards\Flashcard.java
 D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\SecurityConfig.java
+D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Controller\PingController.java
 D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\FlashcardSet.java
 D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Repository\FlashcardSetRepository.java
 D:\.Bond\Comptuer Science IA\Quizzify\src\main\java\dev\BlueOrcaz\Quizzify\Model\Account.java

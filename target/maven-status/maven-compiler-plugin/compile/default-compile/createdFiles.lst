@@ -3,6 +3,7 @@ dev\BlueOrcaz\Quizzify\Repository\FolderRepository.class
 dev\BlueOrcaz\Quizzify\Controller\AccountController.class
 dev\BlueOrcaz\Quizzify\Service\AccountService.class
 dev\BlueOrcaz\Quizzify\Model\Flashcards\MCQFlashcard.class
+dev\BlueOrcaz\Quizzify\Controller\PingController.class
 dev\BlueOrcaz\Quizzify\QuizzifyApplication.class
 dev\BlueOrcaz\Quizzify\Repository\FlashcardSetRepository.class
 dev\BlueOrcaz\Quizzify\SecurityConfig.class

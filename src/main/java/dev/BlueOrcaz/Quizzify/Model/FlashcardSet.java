@@ -14,8 +14,9 @@ import java.util.ArrayList;
 
 public class FlashcardSet {
     @Id // generated when added to the database
-    private ObjectId id;
-    private ObjectId authorId; // the user's objectid
+    private String id;
+    private String authorId; // the user's objectid
+    private String authorUsername;
 
     // flashcard details
     private String setType;
@@ -30,8 +31,9 @@ public class FlashcardSet {
 
 
     // constructor
-    public FlashcardSet(ObjectId authorId, String setType, boolean isPublic, String name, String description, String creationDate, ArrayList<Flashcard> flashcards, ArrayList<MCQFlashcard> mcqFlashcards) {
+    public FlashcardSet(String authorId, String authorUsername, String setType, boolean isPublic, String name, String description, String creationDate, ArrayList<Flashcard> flashcards, ArrayList<MCQFlashcard> mcqFlashcards) {
         this.authorId = authorId;
+        this.authorUsername = authorUsername;
         this.setType = setType;
         this.isPublic = isPublic;
         this.name = name;
@@ -42,20 +44,28 @@ public class FlashcardSet {
     }
 
     //getter setters
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public ObjectId getAuthorId() {
+    public String getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(ObjectId authorId) {
+    public void setAuthorId(String authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
     }
 
     public String getSetType() {

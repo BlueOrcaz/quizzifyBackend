@@ -29,9 +29,6 @@ public class FlashcardSetService {
     public List<FlashcardSet> allFlashcardSets() { return flashcardSetRepository.findAll(); } // list of all flashcard sets
     public Optional<FlashcardSet> findFlashcardSet(ObjectId id) { return flashcardSetRepository.findById(id); } // find a flashcard set object based off of a specific id
 
-    public Optional<FlashcardSet> findAllFlashcardSetsBasedOffAuthorId(ObjectId authorId) {
-        return flashcardSetRepository.findAllById(authorId);
-    }
 
     public String retrieveFlashcardString(FlashcardSet flashcardSet) {
         return flashcardSet.getId().toString();
@@ -39,7 +36,8 @@ public class FlashcardSetService {
 
 
     // create a flashcard set based off of all details.
-    public FlashcardSet createFlashcardSet(ObjectId authorId,
+    public FlashcardSet createFlashcardSet(String authorId,
+                                           String authorUsername,
                                            String setType,
                                            boolean isPublic,
                                            String setName,
@@ -51,6 +49,7 @@ public class FlashcardSetService {
 
         FlashcardSet newFlashcardSet = flashcardSetRepository.insert(new FlashcardSet(
                 authorId,
+                authorUsername,
                 setType,
                 isPublic,
                 setName,
@@ -60,14 +59,16 @@ public class FlashcardSetService {
                 mcqFlashcards
         ));
 
-        accountService.addFlashcardSetToAccount(authorId, newFlashcardSet);
+        ObjectId oAuthorId = new ObjectId(authorId);
+
+        accountService.addFlashcardSetToAccount(oAuthorId, newFlashcardSet);
 
         return newFlashcardSet;
     }
 
 
     // updates flashcard set based off of the id, author id and flashcard set object
-    public FlashcardSet updateFlashcardSet(ObjectId id, ObjectId authorId, FlashcardSet updatedFlashcardSet) {
+    public FlashcardSet updateFlashcardSet(ObjectId id, String authorId, FlashcardSet updatedFlashcardSet) {
         FlashcardSet existingSet = flashcardSetRepository.findById(id).orElse(null); // if it doesnt find anything, return null
         if(existingSet == null) {
             return null;
@@ -77,8 +78,8 @@ public class FlashcardSetService {
         }
 
         existingSet.setName(updatedFlashcardSet.getName());
-        existingSet.setSetType(updatedFlashcardSet.getSetType());
         existingSet.setPublic(updatedFlashcardSet.isPublic());
+        existingSet.setSetType(updatedFlashcardSet.getSetType());
         existingSet.setDescription(updatedFlashcardSet.getDescription());
         existingSet.setFlashcards(updatedFlashcardSet.getFlashcards());
         existingSet.setMcqFlashcards(updatedFlashcardSet.getMcqFlashcards());

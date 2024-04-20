@@ -1,5 +1,6 @@
 package dev.BlueOrcaz.Quizzify.Controller;
 
+import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Service.FlashcardSetService;
 import org.apache.coyote.Response;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,9 +29,9 @@ public class FlashcardSetController {
         return new ResponseEntity<Optional<FlashcardSet>>(flashcardSetService.findFlashcardSet(id), HttpStatus.OK);
     }
 
-    @GetMapping("/all/{authorId}")
-    public ResponseEntity<Optional<FlashcardSet>> getAuthorFlashcardSets(@PathVariable ObjectId authorId) {
-        return new ResponseEntity<Optional<FlashcardSet>>(flashcardSetService.findAllFlashcardSetsBasedOffAuthorId(authorId), HttpStatus.OK);
+    @GetMapping // get ALL account objects.
+    public ResponseEntity<List<FlashcardSet>> getAllFlashcardSets() {
+        return new ResponseEntity<List<FlashcardSet>>(flashcardSetService.allFlashcardSets(), HttpStatus.OK);
     }
 
 
@@ -37,6 +39,7 @@ public class FlashcardSetController {
     public ResponseEntity<String> createFlashcardSet(@RequestBody FlashcardSet flashcardSet) {
         FlashcardSet createdSet = flashcardSetService.createFlashcardSet(
                 flashcardSet.getAuthorId(),
+                flashcardSet.getAuthorUsername(),
                 flashcardSet.getSetType(),
                 flashcardSet.isPublic(),
                 flashcardSet.getName(),
@@ -51,7 +54,7 @@ public class FlashcardSetController {
 
     @PutMapping("/update/{id}") // put request to update flashcards. Only allowed to update flashcards you made.
     public ResponseEntity<FlashcardSet> updateFlashcardSet(@PathVariable("id") ObjectId id,
-                                                           @RequestParam("authorId") ObjectId authorId,
+                                                           @RequestParam("authorId") String authorId,
                                                            @RequestBody FlashcardSet updatedFlashcardSet) {
         FlashcardSet updated = flashcardSetService.updateFlashcardSet(id, authorId, updatedFlashcardSet);
         if (updated != null) {
