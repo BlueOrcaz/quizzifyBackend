@@ -58,16 +58,16 @@ public class AccountService {
         ));
     }
 
-    public void addFlashcardSetToAccount(ObjectId accountId, FlashcardSet flashcardSet) {
-        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
-        account.getCreatedFlashcardSetsArrayList().add(flashcardSet.getId().toString());
-        accountRepository.save(account);
+    public void addFlashcardSetToAccount(ObjectId accountId, FlashcardSet flashcardSet) { // add a flashcard set to the account by getting the specific id each time a flashcard set is made
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found")); // find account
+        account.getCreatedFlashcardSetsArrayList().add(flashcardSet.getId().toString()); // get the id
+        accountRepository.save(account); // update account repo
     }
 
-    public void addFolderSetToAccount(ObjectId accountId, Folder folder) {
-        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
-        account.getCreatedFoldersArrayList().add(folder.getId().toString());
-        accountRepository.save(account);
+    public void addFolderSetToAccount(ObjectId accountId, Folder folder) { // add a folder to the account by getting specific id each time a flashcard set is made
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found")); // find account
+        account.getCreatedFoldersArrayList().add(folder.getId().toString()); // get the id
+        accountRepository.save(account);// update account repo
     }
 
 
@@ -77,12 +77,12 @@ public class AccountService {
         Account existingAccount = accountRepository.findById(id)
                 .orElse(null); // if there isnt anything return null
 
-        if (existingAccount == null) {
+        if (existingAccount == null) { // if no account is found then return null
             return null;
         }
 
 
-        if (!passwordEncoder.matches(currentPassword, existingAccount.getPassword())) {
+        if (!passwordEncoder.matches(currentPassword, existingAccount.getPassword())) { // if doesnt match then it wont update account
             return null;
         }
 
@@ -93,8 +93,8 @@ public class AccountService {
 
         String newPassword = updatedAccount.getPassword();
         if (newPassword != null && !newPassword.isEmpty()) {
-            String encodedPassword = passwordEncoder.encode(newPassword);
-            existingAccount.setPassword(encodedPassword);
+            String encodedPassword = passwordEncoder.encode(newPassword); // encode passsword in a hash
+            existingAccount.setPassword(encodedPassword); // update password hash in database
         }
 
         return accountRepository.save(existingAccount); // update the account in database with the new details
@@ -103,7 +103,7 @@ public class AccountService {
     public boolean login(String username, String password) { // allows user to login if they find account details and password matches
         Account account = accountRepository.findByUsername(username);
         if(account != null) {
-            return passwordEncoder.matches(password, account.getPassword());
+            return passwordEncoder.matches(password, account.getPassword()); // check if the password matches
         }
         return false;
     }

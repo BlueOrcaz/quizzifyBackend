@@ -10,9 +10,9 @@ import java.util.ArrayList;
 @Data
 public class MCQFlashcard {
     // mcq flashcard consisting of an id, question, as well as an option arraylist of all possible options
-    private String id;
-    private String question;
-    private ArrayList<MCQOption> allOptions;
+    private String id; // id
+    private String question; // value
+    private ArrayList<MCQOption> allOptions; // arraylist of all possible options
 
     public String getId() {
         return id;

@@ -12,14 +12,14 @@ import java.util.List;
 @Data
 
 public class Folder {
-    @Id
+    @Id // let lombok know to generate an object id for the folder
     private ObjectId id;
-    private ObjectId authorId;
-    private String folderName;
+    private ObjectId authorId; // add it to authorid
+    private String folderName; // values
     private String creationDate;
     private ArrayList<String> storedFlashcardSets;
 
-    public Folder(ObjectId id, ObjectId authorId, String folderName, String creationDate, ArrayList<String> storedFlashcardSets) {
+    public Folder(ObjectId id, ObjectId authorId, String folderName, String creationDate, ArrayList<String> storedFlashcardSets) { // constructors
         this.id = id;
         this.authorId = authorId;
         this.folderName = folderName;

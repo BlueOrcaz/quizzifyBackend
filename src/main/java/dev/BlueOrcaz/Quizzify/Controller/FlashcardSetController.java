@@ -1,9 +1,7 @@
 package dev.BlueOrcaz.Quizzify.Controller;
 
-import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Service.FlashcardSetService;
-import org.apache.coyote.Response;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/v1/flashcardSets")
-@CrossOrigin(origins = "*")
+@RestController // tell spring boot it is a controller class
+@RequestMapping("/api/v1/flashcardSets") // start of api link
+@CrossOrigin(origins = "*") // can access from any origin
 public class FlashcardSetController {
-    @Autowired
+    @Autowired // autowire dependencies
     private final FlashcardSetService flashcardSetService; // flashcard set service stores all necessary methods
     public FlashcardSetController(FlashcardSetService flashcardSetService) { // constructor
         this.flashcardSetService = flashcardSetService;
@@ -37,8 +35,8 @@ public class FlashcardSetController {
 
     @PostMapping("/createFlashcardSet") // sends post request to the server to create a flashcard set with all details
     public ResponseEntity<String> createFlashcardSet(@RequestBody FlashcardSet flashcardSet) {
-        FlashcardSet createdSet = flashcardSetService.createFlashcardSet(
-                flashcardSet.getAuthorId(),
+        FlashcardSet createdSet = flashcardSetService.createFlashcardSet( // create a flashcard set object in the backend
+                flashcardSet.getAuthorId(), // params
                 flashcardSet.getAuthorUsername(),
                 flashcardSet.getSetType(),
                 flashcardSet.isPublic(),
@@ -54,10 +52,10 @@ public class FlashcardSetController {
 
     @PutMapping("/update/{id}") // put request to update flashcards. Only allowed to update flashcards you made.
     public ResponseEntity<FlashcardSet> updateFlashcardSet(@PathVariable("id") ObjectId id,
-                                                           @RequestParam("authorId") String authorId,
+                                                           @RequestParam("authorId") String authorId, // need to input author id as a param
                                                            @RequestBody FlashcardSet updatedFlashcardSet) {
-        FlashcardSet updated = flashcardSetService.updateFlashcardSet(id, authorId, updatedFlashcardSet);
-        if (updated != null) {
+        FlashcardSet updated = flashcardSetService.updateFlashcardSet(id, authorId, updatedFlashcardSet); // call from flashcard set service
+        if (updated != null) { // if account has been successfully updated then return ok
             return ResponseEntity.ok(updated);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Or return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -65,12 +63,12 @@ public class FlashcardSetController {
     }
 
     @DeleteMapping("/deleteFlashcardSet/{id}")
-    public ResponseEntity<String> deleteFlashcardSet(@PathVariable ObjectId id, @RequestParam("authorId") ObjectId accountId) {
-        boolean deleted = flashcardSetService.deleteFlashcardSet(accountId, id);
-        if (deleted) {
+    public ResponseEntity<String> deleteFlashcardSet(@PathVariable ObjectId id, @RequestParam("authorId") ObjectId accountId) { // delete flashcard set with account param
+        boolean deleted = flashcardSetService.deleteFlashcardSet(accountId, id); // fill in params
+        if (deleted) { // if it returns true then return ok
             return ResponseEntity.ok("Flashcard Set Deleted");
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // return error if not
         }
     }
 

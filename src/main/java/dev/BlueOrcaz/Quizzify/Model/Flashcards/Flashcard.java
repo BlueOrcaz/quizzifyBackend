@@ -1,23 +1,17 @@
 package dev.BlueOrcaz.Quizzify.Model.Flashcards;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import java.util.List;
 
-@Document(collection = "flashcards")
-@Data
+@Document(collection = "flashcards") // where the flashcards will be stored in the database
+@Data // tell spring boot that this is a database object/entry
 
 public class Flashcard {
     // flashcard object consisting of an id, front, and back
-    private int id;
-    private String front;
-    private String back;
+    private int id; // id in the flashcard set; this is one flashcard amongst multiple flashcard sets
+    private String front; // value
+    private String back; // value
 
     public int getId() {
         return id;

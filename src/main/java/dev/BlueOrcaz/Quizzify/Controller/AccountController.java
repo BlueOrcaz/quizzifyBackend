@@ -1,7 +1,6 @@
 package dev.BlueOrcaz.Quizzify.Controller;
 
 import dev.BlueOrcaz.Quizzify.Model.Account;
-import dev.BlueOrcaz.Quizzify.Model.FlashcardSet;
 import dev.BlueOrcaz.Quizzify.Service.AccountService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 
-@RestController
-@RequestMapping("/api/v1/accounts")
-@CrossOrigin(origins = "*")
+@RestController // tells spring boot that it is a controller class
+@RequestMapping("/api/v1/accounts") // api link - eg: http:localhost:8080/api/v1/accounts/*inserthere*/
+@CrossOrigin(origins = "*") // open to access
 
 public class AccountController {
     @Autowired // automatically wire required dependencies in classes
@@ -27,7 +26,7 @@ public class AccountController {
 
     @PostMapping("/createAccount") // post request that the end user uses to create account (/api/v1/accounts/createAccount)
     public ResponseEntity<Account> createAccount(@RequestBody Account account) { // request body consists of all account details in account object
-        Account createdAccount = accountService.createAccount(account.getId(),
+        Account createdAccount = accountService.createAccount(account.getId(), // create account method from accountservice
                 account.getUsername(),
                 account.getPassword(),
                 account.getEmail(),
@@ -44,11 +43,11 @@ public class AccountController {
     public ResponseEntity<String> loginAccount(@RequestBody Account account) {
         boolean isAuthenticated = accountService.login(account.getUsername(), account.getPassword()); // checks if the login details match
         if (isAuthenticated) { // if it is then return the id and account role.
-            String role = accountService.retrieveRole(account.getUsername());
-            ObjectId id = accountService.retrieveId(account.getUsername());
+            String role = accountService.retrieveRole(account.getUsername()); // get role from the username
+            ObjectId id = accountService.retrieveId(account.getUsername()); // get the id from username
             return ResponseEntity.ok().body("{\"username\": \"" + account.getUsername() + "\", \"role\": \"" + role + "\", \"id\": \"" + id.toHexString() + "\"}"); // returns account details and their id for localstorage to store
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"UNAUTHORIZED\"}");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"UNAUTHORIZED\"}"); // let front end know that they are unauthorised
         }
     }
 
@@ -76,17 +75,17 @@ public class AccountController {
     }
 
     @GetMapping // get ALL account objects.
-    public ResponseEntity<List<Account>> getAllAccounts() {
+    public ResponseEntity<List<Account>> getAllAccounts() { // retrieve all accounts from the database by calling the method allAccounts() which returns the data in an account list
         return new ResponseEntity<List<Account>>(accountService.allAccounts(), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteAccount/{id}")
-    public ResponseEntity<String> deleteAccount(@PathVariable ObjectId id, @RequestParam("currentPassword") String currentPassword) {
-        boolean deleted = accountService.deleteAccount(id, currentPassword);
-        if (deleted) {
-            return ResponseEntity.ok("Account deleted");
+    public ResponseEntity<String> deleteAccount(@PathVariable ObjectId id, @RequestParam("currentPassword") String currentPassword) { // delete account with the current password as a parameter
+        boolean deleted = accountService.deleteAccount(id, currentPassword); // deleteAccount method in service class
+        if (deleted) { // if the account is deleted then
+            return ResponseEntity.ok("Account deleted"); // response saying that the account has been deleted
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // if not then return account not found
         }
     }
 

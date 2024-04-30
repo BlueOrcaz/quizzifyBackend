@@ -36,7 +36,7 @@ public class FlashcardSetService {
 
 
     // create a flashcard set based off of all details.
-    public FlashcardSet createFlashcardSet(String authorId,
+    public FlashcardSet createFlashcardSet(String authorId, // params
                                            String authorUsername,
                                            String setType,
                                            boolean isPublic,
@@ -92,26 +92,25 @@ public class FlashcardSetService {
         Optional<Account> accountOptional = accountRepository.findById(accountId);
         Optional<FlashcardSet> flashcardSetOptional = flashcardSetRepository.findById(flashcardId);
 
-        if (accountOptional.isPresent() && flashcardSetOptional.isPresent()) {
-            Account account = accountOptional.get();
+        if (accountOptional.isPresent() && flashcardSetOptional.isPresent()) { // if an account and flashcard is found
+            Account account = accountOptional.get(); // get account
             FlashcardSet flashcardSet = flashcardSetOptional.get();
             ArrayList<String> flashcardSets = account.getCreatedFlashcardSetsArrayList();
 
-            // Check if the flashcard set ID exists in the account's list
-            if (flashcardSets.contains(flashcardId.toString())) {
-                // Remove the flashcard set ID from the list
-                flashcardSets.remove(flashcardId.toString());
-                // Update the account with the removed flashcard set ID
-                account.setCreatedFlashcardSetsArrayList(flashcardSets);
-                // Save the updated account
-                accountRepository.save(account);
-                // Delete the flashcard set from the repository
-                flashcardSetRepository.delete(flashcardSet);
-                return true;
+            // check if the flashcard set ID exists in the account's list
+            for(int i = 0; i < flashcardSets.size(); i++) {
+                if(flashcardSets.get(i).equals(flashcardId.toString())) {
+                    flashcardSets.remove(i); // remove specific index
+                    account.setCreatedFlashcardSetsArrayList(flashcardSets); // update arraylist
+                    accountRepository.save(account); // update database for accounts
+                    flashcardSetRepository.delete(flashcardSet); // remove entry from database entry
+                    return true;
+                }
             }
         }
-        return false; // If account or flashcard set not found, or not owner, return false
+        return false;
     }
+    
 
 
 
