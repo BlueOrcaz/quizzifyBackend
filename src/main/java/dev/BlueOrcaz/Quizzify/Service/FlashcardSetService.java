@@ -26,8 +26,12 @@ public class FlashcardSetService {
         this.accountRepository = accountRepository;
         this.accountService = accountService;
     }
-    public List<FlashcardSet> allFlashcardSets() { return flashcardSetRepository.findAll(); } // list of all flashcard sets
-    public Optional<FlashcardSet> findFlashcardSet(ObjectId id) { return flashcardSetRepository.findById(id); } // find a flashcard set object based off of a specific id
+    public List<FlashcardSet> allFlashcardSets() {
+        return flashcardSetRepository.findAll();
+    } // list of all flashcard sets
+    public Optional<FlashcardSet> findFlashcardSet(ObjectId id) {
+        return flashcardSetRepository.findById(id);
+    } // find a flashcard set object based off of a specific id
 
 
     public String retrieveFlashcardString(FlashcardSet flashcardSet) {

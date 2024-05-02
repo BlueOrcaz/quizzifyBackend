@@ -27,7 +27,7 @@ public class FlashcardSetController {
         return new ResponseEntity<Optional<FlashcardSet>>(flashcardSetService.findFlashcardSet(id), HttpStatus.OK);
     }
 
-    @GetMapping // get ALL account objects.
+    @GetMapping // get ALL flashcard set objects.
     public ResponseEntity<List<FlashcardSet>> getAllFlashcardSets() {
         return new ResponseEntity<List<FlashcardSet>>(flashcardSetService.allFlashcardSets(), HttpStatus.OK);
     }
