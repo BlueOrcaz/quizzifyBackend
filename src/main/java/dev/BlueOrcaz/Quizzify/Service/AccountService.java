@@ -44,18 +44,24 @@ public class AccountService {
                                  ArrayList<String> createdFoldersArrayList
                                  ) { // method to create accounts, as well as encode the password to store in database
 
-        String encodedPassword = this.passwordEncoder.encode(password);
+            String encodedPassword = this.passwordEncoder.encode(password);
 
-        return accountRepository.insert(new Account(id,
-                username,
-                encodedPassword,
-                email,
-                dateOfBirth,
-                educationalRole,
-                role,
-                createdFlashcardSetsArrayList,
-                createdFoldersArrayList
-        ));
+
+            return accountRepository.insert(new Account(id,
+                    username,
+                    encodedPassword,
+                    email,
+                    dateOfBirth,
+                    educationalRole,
+                    role,
+                    createdFlashcardSetsArrayList,
+                    createdFoldersArrayList
+            ));
+
+    }
+
+    public boolean duplicateUsername(String username) {
+        return accountRepository.findByUsername(username) != null;
     }
 
     public void addFlashcardSetToAccount(ObjectId accountId, FlashcardSet flashcardSet) { // add a flashcard set to the account by getting the specific id each time a flashcard set is made

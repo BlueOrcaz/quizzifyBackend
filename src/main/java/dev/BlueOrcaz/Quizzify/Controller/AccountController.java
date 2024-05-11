@@ -1,5 +1,6 @@
 package dev.BlueOrcaz.Quizzify.Controller;
 
+import com.mongodb.DuplicateKeyException;
 import dev.BlueOrcaz.Quizzify.Model.Account;
 import dev.BlueOrcaz.Quizzify.Service.AccountService;
 import org.bson.types.ObjectId;
@@ -26,6 +27,10 @@ public class AccountController {
 
     @PostMapping("/createAccount") // post request that the end user uses to create account (/api/v1/accounts/createAccount)
     public ResponseEntity<Account> createAccount(@RequestBody Account account) { // request body consists of all account details in account object
+        if (accountService.duplicateUsername(account.getUsername())) {
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(account);
+        }
+
         Account createdAccount = accountService.createAccount(account.getId(), // create account method from accountservice
                 account.getUsername(),
                 account.getPassword(),
