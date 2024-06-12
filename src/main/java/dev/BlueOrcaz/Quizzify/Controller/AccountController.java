@@ -80,7 +80,7 @@ public class AccountController {
     }
 
     @GetMapping // get ALL account objects.
-    public ResponseEntity<List<Account>> getAllAccounts() { // retrieve all accounts from the database by calling the method allAccounts() which returns the data in an account list
+    public ResponseEntity<List<Account>> getAllAccounts() {
         return new ResponseEntity<List<Account>>(accountService.allAccounts(), HttpStatus.OK);
     }
 

@@ -10,5 +10,4 @@ import java.util.Optional;
 @Repository
 
 public interface FlashcardSetRepository extends MongoRepository<FlashcardSet, ObjectId> {
-    Optional<FlashcardSet> findAllById(ObjectId authorId); // allows for backend to search for details based off of an id
 }
